@@ -13,11 +13,7 @@
       src: url('Azonix.otf') format('opentype');
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
       background: #000;
@@ -26,11 +22,10 @@
       scroll-behavior: smooth;
     }
 
-    /* ---------- HEADER ---------- */
+    /* HEADER */
     header {
       padding: 40px 0 30px;
       text-align: center;
-      animation: fadeIn 1.5s ease;
     }
 
     header img {
@@ -48,14 +43,10 @@
       opacity: 0.85;
     }
 
-    nav a {
-      text-decoration: none;
-      color: #e5e5e5;
-    }
-
+    nav a { color: #e5e5e5; text-decoration: none; }
     nav a:hover { opacity: 0.5; }
 
-    /* ---------- SECTIONS ---------- */
+    /* SECTIONS */
     section {
       min-height: 100vh;
       padding: 90px 20px;
@@ -88,7 +79,7 @@
       opacity: 0.85;
     }
 
-    /* ---------- PRODUCT BACKGROUND (EDGELESS) ---------- */
+    /* PRODUCT BACKGROUND (EDGELESS) */
     .product-bg {
       position: relative;
       overflow: hidden;
@@ -118,7 +109,7 @@
       z-index: -1;
     }
 
-    /* ---------- GRAIN OVERLAY ---------- */
+    /* GRAIN */
     body::after {
       content: "";
       position: fixed;
@@ -129,7 +120,7 @@
       z-index: 999;
     }
 
-    /* ---------- PRODUCT IMAGES ---------- */
+    /* IMAGES */
     .images {
       margin-top: 60px;
       display: flex;
@@ -153,7 +144,7 @@
       .images img:hover { transform: scale(1.06); opacity: 1; }
     }
 
-    /* ---------- FORM ---------- */
+    /* FORM */
     form {
       margin-top: 40px;
       width: 100%;
@@ -168,7 +159,6 @@
       border: 1px solid rgba(255,255,255,0.2);
       padding: 14px;
       color: #fff;
-      font-family: 'Inter', sans-serif;
     }
 
     button {
@@ -189,22 +179,15 @@
       text-align: center;
     }
 
-    /* ---------- FADE IN ON SCROLL ---------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1s ease, transform 1s ease;
+    /* REVIEW SCREEN */
+    #review-screen {
+      display: none;
+      margin-top: 60px;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    /* FADE IN */
+    .reveal { opacity: 0; transform: translateY(40px); transition: 1s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 
@@ -243,16 +226,14 @@
     <img src="jacket-back-alt.png">
   </div>
 
-  <p style="margin-top:40px;">
-    Release Date: To Be Announced
-  </p>
+  <p style="margin-top:40px;">Release Date: To Be Announced</p>
 </section>
 
 <section id="purchase" class="reveal">
   <h1>REQUEST ACCESS</h1>
   <h2>ORDERS ARE REVIEWED</h2>
 
-  <form action="https://formspree.io/f/mrbnjobk" method="POST">
+  <form id="access-form" action="https://formspree.io/f/mrbnjobk" method="POST">
     <input type="text" name="name" placeholder="Full Name" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="text" name="instagram" placeholder="Your Instagram Username" required>
@@ -260,17 +241,18 @@
     <textarea name="message" rows="4" placeholder="Product / Message"></textarea>
     <button type="submit">SUBMIT REQUEST</button>
   </form>
-   <div id="review-screen" style="display:none; margin-top:60px;">
+
+  <div id="review-screen">
     <h1>APPLICATION RECEIVED</h1>
     <h2>UNDER REVIEW</h2>
-  <p>
-    Your request has been submitted.<br><br>
-    FANCLUB does not operate on instant access.
-    Every application is reviewed internally.<br><br>
-    If approved, you will be contacted directly.<br><br>
-    No further action is required.
-  </p>
-</div>
+    <p>
+      Your request has been submitted.<br><br>
+      FANCLUB does not operate on instant access.
+      Every application is reviewed internally.<br><br>
+      If approved, you will be contacted directly.<br><br>
+      No further action is required.
+    </p>
+  </div>
 </section>
 
 <footer>© FANCLUB — MEMBERS ONLY</footer>
@@ -280,29 +262,29 @@
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.15 });
-
   reveals.forEach(r => observer.observe(r));
 
-  // Application reviewed screen
-  const form = document.querySelector("form");
-  const reviewScreen = document.getElementById("review-screen");
+  // Form submission handling
+  const form = document.getElementById("access-form");
+  const review = document.getElementById("review-screen");
 
-  if (form && reviewScreen) {
-    form.addEventListener("submit", () => {
-      setTimeout(() => {
-        form.style.display = "none";
-        reviewScreen.style.display = "block";
-        reviewScreen.classList.add("visible");
-      }, 300);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
     });
-  }
-</script>
 
+    form.style.display = "none";
+    review.style.display = "block";
+    review.classList.add("visible");
+  });
+</script>
 
 </body>
 </html>
