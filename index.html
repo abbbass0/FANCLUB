@@ -35,17 +35,24 @@ header {
   top: env(safe-area-inset-top);
   z-index: 1000;
 
-  padding: calc(20px + env(safe-area-inset-top)) 0 16px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
+  padding: 24px 0 16px;
+  gap: 10px;
+
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
 }
 
 
+
 header img {
-  width: 200px;
-  margin-bottom: 16px;
+  width: 160px;
+  transition: filter 0.5s ease;
+}
+
 
   /* make logo white */
   filter: brightness(0) invert(1);
@@ -106,11 +113,11 @@ header img {
 nav {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  font-size: 13px;
+  gap: 20px;
+  font-size: 12px;
   letter-spacing: 2px;
-  opacity: 0.85;
 }
+
 
 nav a {
   color: #e5e5e5;
@@ -132,8 +139,9 @@ section {
 
   /* Prevent first section from hiding behind sticky header */
 section:first-of-type {
-  padding-top: 100px;
+  padding-top: 40px;
 }
+
 
 
 
