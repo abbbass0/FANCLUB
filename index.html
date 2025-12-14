@@ -18,7 +18,22 @@
       box-sizing: border-box;
     }
 
- body {
+/* Product background — concrete wall */
+.product-bg {
+  position: relative;
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.85),
+      rgba(0,0,0,0.85)
+    ),
+    url("concrete-wall.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+  
+    body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(180deg, #0f0f0f 0%, #000000 60%);
   color: #e5e5e5;
@@ -232,7 +247,7 @@ header img {
   </section>
 
   <!-- PRODUCT -->
-  <section id="product">
+  <section id="product" class="product-bg">
     <h1>DROP 001</h1>
     <h2>LIMITED · CONTROLLED</h2>
 
