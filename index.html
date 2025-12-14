@@ -28,11 +28,10 @@ html, body {
   overflow-x: hidden;
 }
 
-/* ---------- HEADER ---------- */
+/* ---------- HEADER (NORMAL, NOT STICKY) ---------- */
 header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  position: relative;
+  z-index: 1;
 
   display: flex;
   flex-direction: column;
@@ -92,11 +91,6 @@ nav a {
 
 nav a:hover {
   opacity: 0.5;
-}
-
-/* ---------- SPACER (CRITICAL) ---------- */
-.top-spacer {
-  height: 80px;
 }
 
 /* ---------- SECTIONS ---------- */
@@ -257,8 +251,6 @@ footer {
   </nav>
 </header>
 
-<div class="top-spacer"></div>
-
 <section>
   <h1>MEMBERS ONLY</h1>
   <h2>ACCESS IS LIMITED</h2>
@@ -291,6 +283,16 @@ footer {
 <section id="drop">
   <h1>DROP 001</h1>
   <h2>LIMITED · CONTROLLED</h2>
+
+  <div class="images">
+    <img src="jacket-front.png" alt="">
+    <img src="jacket-back.png" alt="">
+  </div>
+
+  <div class="images">
+    <img src="jacket-front-alt.png" alt="">
+    <img src="jacket-back-alt.png" alt="">
+  </div>
 </section>
 
 <section id="purchase">
@@ -301,6 +303,7 @@ footer {
     <input name="email" type="email" placeholder="Email" required>
     <input name="instagram" placeholder="Instagram Username" required>
     <input name="address" placeholder="City / Address" required>
+    <textarea name="message" rows="4" placeholder="Product / Message"></textarea>
     <button type="submit">SUBMIT REQUEST</button>
   </form>
 
