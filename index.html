@@ -13,7 +13,11 @@
   src: url('Azonix.otf') format('opentype');
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html, body {
   background: #000;
@@ -48,7 +52,9 @@ nav a {
   text-decoration: none;
 }
 
-nav a:hover { opacity: 0.5; }
+nav a:hover {
+  opacity: 0.5;
+}
 
 /* SECTIONS */
 section {
@@ -83,47 +89,6 @@ p {
   opacity: 0.85;
 }
 
-/* PRODUCT BACKGROUND (WALL) */
-.product-bg {
-  position: relative;
-  overflow: hidden;
-}
-
-.product-bg::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  background: url("concrete-wall.jpeg") center 75% / cover no-repeat;
-  filter: blur(18px);
-  opacity: 0.35;
-  z-index: -2;
-}
-
-.product-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    #000 0%,
-    rgba(0,0,0,0.4) 30%,
-    rgba(0,0,0,0.4) 70%,
-    #000 100%
-  );
-  z-index: -1;
-}
-
-/* GRAIN */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("grain.png");
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 999;
-}
-
 /* PRODUCT IMAGES */
 .images {
   margin-top: 60px;
@@ -136,17 +101,24 @@ body::after {
 .images img {
   width: 260px;
   opacity: 0.9;
-  transition: transform 0.6s ease, opacity 0.6s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
+/* TABLET */
 @media (min-width: 768px) {
-  .images img { width: 380px; }
+  .images img {
+    width: 380px;
+  }
 }
 
-@media (min-width: 1200px) {
-  .images img { width: 580px; }
+/* DESKTOP — HOVER WORKS HERE */
+@media (min-width: 1024px) {
+  .images img {
+    width: 520px;
+  }
+
   .images img:hover {
-    transform: scale(1.06);
+    transform: scale(1.07);
     opacity: 1;
   }
 }
@@ -177,8 +149,11 @@ button {
   letter-spacing: 2px;
 }
 
-button:hover { opacity: 0.7; }
+button:hover {
+  opacity: 0.7;
+}
 
+/* REVIEW SCREEN */
 #review-screen {
   display: none;
   margin-top: 60px;
@@ -214,7 +189,7 @@ footer {
   </p>
 </section>
 
-<section id="product" class="product-bg">
+<section id="product">
   <h1>DROP 001</h1>
   <h2>LIMITED · CONTROLLED</h2>
 
@@ -228,7 +203,9 @@ footer {
     <img src="jacket-back-alt.png" alt="">
   </div>
 
-  <p style="margin-top:40px;">Release Date: To Be Announced</p>
+  <p style="margin-top:40px;">
+    Release Date: To Be Announced
+  </p>
 </section>
 
 <section id="purchase">
