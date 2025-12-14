@@ -118,11 +118,35 @@ header img {
       justify-content: center;
     }
 
-    .images img {
-      width: 260px;
-      opacity: 0.9;
-      transition: transform 0.6s ease, opacity 0.6s ease;
-    }
+   .images img {
+  width: 260px;        /* mobile */
+  max-width: 90%;
+  opacity: 0.9;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  background: transparent;
+  display: block;
+}
+
+/* Tablets & small laptops */
+@media (min-width: 768px) {
+  .images img {
+    width: 380px;
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1200px) {
+  .images img {
+    width: 460px;
+  }
+
+  /* Subtle hover zoom – desktop only */
+  .images img:hover {
+    transform: scale(1.05);
+  }
+}
+
+
 
     .images img:hover {
       transform: scale(1.03);
@@ -266,7 +290,7 @@ header img {
 
         const start = window.pageYOffset;
         const end = target.offsetTop;
-        const duration = 500; // fast but smooth (ms)
+        const duration = 800; // fast but smooth (ms)
         let startTime = null;
 
         function scrollAnimation(currentTime) {
