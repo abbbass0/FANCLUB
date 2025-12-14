@@ -31,9 +31,17 @@ html, body {
 
 /* HEADER */
 header {
-  padding: 30px 0 20px;
+  position: sticky;
+  top: env(safe-area-inset-top);
+  z-index: 1000;
+
+  padding: calc(20px + env(safe-area-inset-top)) 0 16px;
   text-align: center;
+
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
 }
+
 
 header img {
   width: 200px;
@@ -121,6 +129,12 @@ section {
   align-items: center;
   text-align: center;
 }
+
+  /* Prevent first section from hiding behind sticky header */
+section:first-of-type {
+  padding-top: 100px;
+}
+
 
 
 h1 {
