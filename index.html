@@ -59,7 +59,7 @@ header img {
   /* Mobile breathing glow — text only */
 @media (max-width: 768px) {
   header img {
-    animation: logoTextGlow 5.5s ease-in-out infinite;
+    animation: logoTextGlow 4.5s ease-in-out infinite;
   }
 }
 
@@ -84,12 +84,15 @@ header img {
 
 
 /* Subtle white glow on hover */
-header img:hover {
-  filter: brightness(1) invert(0);
-  box-shadow: 
-    0 0 12px rgba(255, 255, 255, 0.25),
-    0 0 24px rgba(255, 255, 255, 0.15);
+@media (min-width: 769px) {
+  header img:hover {
+    filter:
+      brightness(0) invert(1)
+      drop-shadow(0 0 12px rgba(255,255,255,0.55))
+      drop-shadow(0 0 26px rgba(255,255,255,0.22));
+  }
 }
+
 
 
 nav {
