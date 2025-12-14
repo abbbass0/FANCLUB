@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FANCLUB Apparel — Members Only Streetwear Brand</title>
 
-<meta name="description" content="FANCLUB is a members-only apparel brand founded in Karachi. Controlled releases, limited access, and intentional design." />
-
+<meta name="description" content="FANCLUB is a members-only apparel brand founded in Karachi. Controlled releases, limited access, and intentional design.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -26,10 +25,10 @@ html, body {
   background: #000;
   color: #e5e5e5;
   font-family: 'Inter', sans-serif;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-/* HEADER */
+/* ---------- HEADER ---------- */
 header {
   position: sticky;
   top: 0;
@@ -39,85 +38,52 @@ header {
   flex-direction: column;
   align-items: center;
 
-  padding: 24px 0 16px;
-  gap: 10px;
+  padding: 14px 0 10px;
+  gap: 8px;
 
-  background: transparent;
+  background: #000;
 }
-
-
-
 
 header img {
-  width: 160px;
-  transition: filter 0.5s ease;
-}
-
-
-  /* make logo white */
+  width: 150px;
   filter: brightness(0) invert(1);
-
-  /* smooth transitions */
   transition: filter 0.5s ease;
 }
 
-  /* Desktop hover — text-shaped glow */
+/* Desktop hover glow */
 @media (min-width: 769px) {
   header img:hover {
     filter:
       brightness(0) invert(1)
-      drop-shadow(0 0 10px rgba(255,255,255,0.35))
-      drop-shadow(0 0 22px rgba(255,255,255,0.2));
+      drop-shadow(0 0 12px rgba(255,255,255,0.5))
+      drop-shadow(0 0 26px rgba(255,255,255,0.25));
   }
 }
 
-  /* Mobile breathing glow — text only */
+/* Mobile breathing glow */
 @media (max-width: 768px) {
   header img {
-    animation: logoTextGlow 4.5s ease-in-out infinite;
+    animation: logoGlow 4.5s ease-in-out infinite;
   }
 }
 
-@keyframes logoTextGlow {
-  0% {
-    filter:
-      brightness(0) invert(1)
-      drop-shadow(0 0 0 rgba(255,255,255,0));
+@keyframes logoGlow {
+  0%,100% {
+    filter: brightness(0) invert(1);
   }
   50% {
     filter:
       brightness(0) invert(1)
-      drop-shadow(0 0 12px rgba(255,255,255,0.65))
-      drop-shadow(0 0 26px rgba(255,255,255,0.22));
-  }
-  100% {
-    filter:
-      brightness(0) invert(1)
-      drop-shadow(0 0 0 rgba(255,255,255,0));
+      drop-shadow(0 0 12px rgba(255,255,255,0.6));
   }
 }
-
-
-/* Subtle white glow on hover */
-@media (min-width: 769px) {
-  header img:hover {
-    filter:
-      brightness(0) invert(1)
-      drop-shadow(0 0 12px rgba(255,255,255,0.55))
-      drop-shadow(0 0 26px rgba(255,255,255,0.22));
-  }
-}
-
-
 
 nav {
   display: flex;
-  justify-content: center;
   gap: 20px;
   font-size: 12px;
   letter-spacing: 2px;
 }
-
 
 nav a {
   color: #e5e5e5;
@@ -128,7 +94,12 @@ nav a:hover {
   opacity: 0.5;
 }
 
-/* SECTIONS */
+/* ---------- SPACER (CRITICAL) ---------- */
+.top-spacer {
+  height: 80px;
+}
+
+/* ---------- SECTIONS ---------- */
 section {
   padding: 60px 20px;
   display: flex;
@@ -136,14 +107,6 @@ section {
   align-items: center;
   text-align: center;
 }
-
-  /* Prevent first section from hiding behind sticky header */
-section:first-of-type {
-  padding-top: 40px;
-}
-
-
-
 
 h1 {
   font-family: 'Azonix', sans-serif;
@@ -157,7 +120,7 @@ h2 {
   font-size: 13px;
   letter-spacing: 5px;
   opacity: 0.6;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 p {
@@ -165,47 +128,14 @@ p {
   font-size: 15px;
   line-height: 1.9;
   opacity: 0.85;
-  margin-bottom: 30px;
 }
 
-
-/* PRODUCT IMAGES */
-.images {
-  margin-top: 60px;
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.images img {
-  width: 260px;
-  opacity: 0.9;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-/* CONCEPT STRIP */
+/* ---------- CONCEPT ---------- */
 .concept-strip {
   padding: 60px 0;
-  background: linear-gradient(
-    to bottom,
-    #000 0%,
-    rgba(0,0,0,0.6) 50%,
-    #000 100%
-  );
 }
 
-.concept-images {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-  /* CONCEPT TEXT */
-  .concept-title {
+.concept-title {
   font-family: 'Azonix', sans-serif;
   font-size: 14px;
   letter-spacing: 4px;
@@ -214,137 +144,69 @@ p {
 }
 
 .concept-text {
+  max-width: 520px;
   font-size: 13px;
   opacity: 0.5;
-  max-width: 520px;
-  margin: 0 auto 40px;
   line-height: 1.7;
-  padding: 0 16px;
-
-  /* HARD mobile safety */
-  width: 100%;
-  box-sizing: border-box;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  padding: 0 18px;
+  margin-bottom: 40px;
 }
 
-
-@media (max-width: 480px) {
-  .concept-text {
-    font-size: 12px;
-    line-height: 1.8;
-    padding: 0 18px;
-  }
+.concept-images {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* JOIN THE CLUB SECTION */
+.concept-images img {
+  height: 320px;
+  opacity: 0.45;
+}
+
+.concept-images img:nth-child(2) {
+  -webkit-mask-image: radial-gradient(circle, #000 60%, transparent 100%);
+  mask-image: radial-gradient(circle, #000 60%, transparent 100%);
+}
+
+/* ---------- JOIN ---------- */
 .join-club {
   padding: 60px 20px 40px;
 }
 
 .join-text {
   max-width: 560px;
-  margin: 0 auto;
   font-size: 15px;
   line-height: 1.8;
   opacity: 0.75;
-  padding: 0 16px;
-
-  /* mobile safety */
-  width: 100%;
-  box-sizing: border-box;
-  overflow-wrap: anywhere;
 }
 
-
-
-
-.concept-images img {
-  width: auto;
-  height: 360px;
-  max-width: 100%;
-  object-fit: contain;
-  opacity: 0.45;
-  filter: none;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+/* ---------- PRODUCT ---------- */
+.images {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
 }
 
-  /* Soft edge fade for sleeve concept (middle image) */
-.concept-images img:nth-child(2) {
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,1) 55%,
-    rgba(0,0,0,0.6) 75%,
-    rgba(0,0,0,0) 100%
-  );
-  mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,1) 55%,
-    rgba(0,0,0,0.6) 75%,
-    rgba(0,0,0,0) 100%
-  );
+.images img {
+  width: 260px;
+  opacity: 0.9;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-
-  /* Slight editorial emphasis on center sketch */
-.concept-images img:nth-child(2) {
-  height: 380px;
-}
-
-/* Subtle interaction (desktop only) */
-@media (min-width: 1024px) {
-  .concept-images img:hover {
-    opacity: 0.65;
-    transform: translateY(-2px);
-  }
-}
-
-
-
-
-/* Slight presence on hover (desktop only) */
-@media (min-width: 1024px) {
-  .concept-images img:hover {
-    opacity: 0.65;
-    transform: translateY(-2px);
-  }
-}
-
-
-/* Mobile stacking */
-@media (max-width: 768px) {
-  .concept-images {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .concept-images img {
-    height: 280px;
-  }
-}
-
-
-  
-/* TABLET */
-@media (min-width: 768px) {
-  .images img {
-    width: 380px;
-  }
-}
-
-/* DESKTOP — HOVER WORKS HERE */
 @media (min-width: 1024px) {
   .images img {
     width: 520px;
   }
-
   .images img:hover {
     transform: scale(1.07);
     opacity: 1;
   }
 }
 
-/* FORM */
+/* ---------- FORM ---------- */
 form {
   margin-top: 40px;
   width: 100%;
@@ -370,11 +232,6 @@ button {
   letter-spacing: 2px;
 }
 
-button:hover {
-  opacity: 0.7;
-}
-
-/* REVIEW SCREEN */
 #review-screen {
   display: none;
   margin-top: 60px;
@@ -391,7 +248,7 @@ footer {
 
 <body>
 
- <header id="home">
+<header id="home">
   <img src="logo.png" alt="FANCLUB Logo">
   <nav>
     <a href="#home">HOME</a>
@@ -399,10 +256,8 @@ footer {
     <a href="#purchase">PURCHASE</a>
   </nav>
 </header>
-  
-<h1 style="position:absolute; left:-9999px;">
-  FANCLUB Apparel — Members Only Streetwear Brand
-</h1>
+
+<div class="top-spacer"></div>
 
 <section>
   <h1>MEMBERS ONLY</h1>
@@ -414,76 +269,44 @@ footer {
   </p>
 </section>
 
-  <!-- CONCEPT STRIP -->
 <section class="concept-strip">
   <h2 class="concept-title">CONCEPT SKETCHES</h2>
   <p class="concept-text">
-    Early design studies exploring form, structure, and restraint. 
-  These sketches represent early explorations of proportion, construction, and restraint.
-    They are not final designs, but references — guiding how each piece should feel,
-  move, and exist before it is ever worn.
+    Early design studies exploring form, structure, and restraint.
   </p>
-
   <div class="concept-images">
-    <img src="sleeve-close-up.png" alt="">
-    <img src="collar-close-up.png" alt="">
-    <img src="hood-back-close-up.png" alt="">
+    <img src="sleeve-close-up.png">
+    <img src="collar-close-up.png">
+    <img src="hood-back-close-up.png">
   </div>
 </section>
 
-  <!-- JOIN THE CLUB -->
 <section class="join-club" id="product">
   <h1>JOIN THE CLUB</h1>
   <p class="join-text">
-    Becoming part of FANCLUB means early access to releases, 
-    private drops, and the opportunity to engage directly with 
-    the process behind each piece. Membership is limited by design.
+    Becoming part of FANCLUB means early access, private drops, and direct connection to the process.
   </p>
 </section>
-
-
-
 
 <section id="drop">
   <h1>DROP 001</h1>
   <h2>LIMITED · CONTROLLED</h2>
-
-  <div class="images">
-    <img src="jacket-front.png" alt="">
-    <img src="jacket-back.png" alt="">
-  </div>
-
-  <div class="images">
-    <img src="jacket-front-alt.png" alt="">
-    <img src="jacket-back-alt.png" alt="">
-  </div>
-
-  <p style="margin-top:40px;">
-    Release Date: To Be Announced
-  </p>
 </section>
 
 <section id="purchase">
   <h1>REQUEST ACCESS</h1>
-  <h2>ORDERS ARE REVIEWED</h2>
 
   <form id="access-form">
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="text" name="instagram" placeholder="Your Instagram Username" required>
-    <input type="text" name="address" placeholder="City / Address" required>
-    <textarea name="message" rows="4" placeholder="Product / Message"></textarea>
+    <input name="name" placeholder="Full Name" required>
+    <input name="email" type="email" placeholder="Email" required>
+    <input name="instagram" placeholder="Instagram Username" required>
+    <input name="address" placeholder="City / Address" required>
     <button type="submit">SUBMIT REQUEST</button>
   </form>
 
   <div id="review-screen">
     <h1>APPLICATION RECEIVED</h1>
-    <h2>UNDER REVIEW</h2>
-    <p>
-      Your request has been submitted.<br><br>
-      Every application is reviewed internally.<br><br>
-      If approved, you will be contacted directly.
-    </p>
+    <p>Every request is reviewed internally.</p>
   </div>
 </section>
 
@@ -493,15 +316,13 @@ footer {
 const form = document.getElementById("access-form");
 const review = document.getElementById("review-screen");
 
-form.addEventListener("submit", function(e) {
+form.addEventListener("submit", e => {
   e.preventDefault();
-
   fetch("https://formspree.io/f/mrbnjobk", {
     method: "POST",
     body: new FormData(form),
     headers: { "Accept": "application/json" }
   });
-
   form.style.display = "none";
   review.style.display = "block";
 });
