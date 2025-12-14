@@ -22,7 +22,6 @@
       scroll-behavior: smooth;
     }
 
-    /* HEADER */
     header {
       padding: 40px 0 30px;
       text-align: center;
@@ -43,10 +42,13 @@
       opacity: 0.85;
     }
 
-    nav a { color: #e5e5e5; text-decoration: none; }
+    nav a {
+      color: #e5e5e5;
+      text-decoration: none;
+    }
+
     nav a:hover { opacity: 0.5; }
 
-    /* SECTIONS */
     section {
       min-height: 100vh;
       padding: 90px 20px;
@@ -79,7 +81,7 @@
       opacity: 0.85;
     }
 
-    /* PRODUCT BACKGROUND (EDGELESS) */
+    /* PRODUCT BACKGROUND */
     .product-bg {
       position: relative;
       overflow: hidden;
@@ -120,7 +122,6 @@
       z-index: 999;
     }
 
-    /* IMAGES */
     .images {
       margin-top: 60px;
       display: flex;
@@ -185,7 +186,7 @@
       margin-top: 60px;
     }
 
-    /* FADE IN */
+    /* FADE-IN */
     .reveal { opacity: 0; transform: translateY(40px); transition: 1s; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
@@ -233,7 +234,14 @@
   <h1>REQUEST ACCESS</h1>
   <h2>ORDERS ARE REVIEWED</h2>
 
-  <form id="access-form" action="https://formspree.io/f/mrbnjobk" method="POST">
+  <!-- HIDDEN IFRAME -->
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+  <form id="access-form"
+        action="https://formspree.io/f/mrbnjobk"
+        method="POST"
+        target="hidden_iframe">
+
     <input type="text" name="name" placeholder="Full Name" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="text" name="instagram" placeholder="Your Instagram Username" required>
@@ -267,22 +275,16 @@
   }, { threshold: 0.15 });
   reveals.forEach(r => observer.observe(r));
 
-  // Form submission handling
+  // Show review screen on submit (no redirect)
   const form = document.getElementById("access-form");
   const review = document.getElementById("review-screen");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    fetch(form.action, {
-      method: "POST",
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-
-    form.style.display = "none";
-    review.style.display = "block";
-    review.classList.add("visible");
+  form.addEventListener("submit", () => {
+    setTimeout(() => {
+      form.style.display = "none";
+      review.style.display = "block";
+      review.classList.add("visible");
+    }, 200);
   });
 </script>
 
