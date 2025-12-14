@@ -19,6 +19,7 @@
       background: #000;
       color: #e5e5e5;
       font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
     }
 
     header {
@@ -45,6 +46,8 @@
       color: #e5e5e5;
       text-decoration: none;
     }
+
+    nav a:hover { opacity: 0.5; }
 
     section {
       min-height: 100vh;
@@ -78,6 +81,57 @@
       opacity: 0.85;
     }
 
+    /* PRODUCT BACKGROUND */
+    .product-bg {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-bg::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: url("concrete-wall.jpeg") center 75% / cover no-repeat;
+      filter: blur(18px);
+      opacity: 0.35;
+      z-index: -2;
+    }
+
+    .product-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        #000 0%,
+        rgba(0,0,0,0.4) 30%,
+        rgba(0,0,0,0.4) 70%,
+        #000 100%
+      );
+      z-index: -1;
+    }
+
+    .images {
+      margin-top: 60px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .images img {
+      width: 260px;
+      opacity: 0.9;
+    }
+
+    @media (min-width: 768px) {
+      .images img { width: 380px; }
+    }
+
+    @media (min-width: 1200px) {
+      .images img { width: 580px; }
+    }
+
     /* FORM */
     form {
       margin-top: 40px;
@@ -108,15 +162,23 @@
       display: none;
       margin-top: 60px;
     }
+
+    footer {
+      padding: 40px;
+      font-size: 12px;
+      opacity: 0.4;
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
 
-<header>
+<header id="home">
   <img src="logo.png" alt="FANCLUB Logo">
   <nav>
     <a href="#home">HOME</a>
+    <a href="#product">PRODUCT</a>
     <a href="#purchase">PURCHASE</a>
   </nav>
 </header>
@@ -124,9 +186,34 @@
 <section>
   <h1>MEMBERS ONLY</h1>
   <h2>ACCESS IS LIMITED</h2>
-  <p>Every application is reviewed. No instant access.</p>
+  <p>
+    FANCLUB is not built for the masses.<br><br>
+    Every application is reviewed.<br><br>
+    No instant access.
+  </p>
 </section>
 
+<!-- PRODUCT -->
+<section id="product" class="product-bg">
+  <h1>DROP 001</h1>
+  <h2>LIMITED · CONTROLLED</h2>
+
+  <div class="images">
+    <img src="jacket-front.png" alt="">
+    <img src="jacket-back.png" alt="">
+  </div>
+
+  <div class="images">
+    <img src="jacket-front-alt.png" alt="">
+    <img src="jacket-back-alt.png" alt="">
+  </div>
+
+  <p style="margin-top:40px;">
+    Release Date: To Be Announced
+  </p>
+</section>
+
+<!-- PURCHASE -->
 <section id="purchase">
   <h1>REQUEST ACCESS</h1>
   <h2>ORDERS ARE REVIEWED</h2>
@@ -144,11 +231,13 @@
     <h2>UNDER REVIEW</h2>
     <p>
       Your request has been submitted.<br><br>
-      FANCLUB does not operate on instant access.<br><br>
+      Every application is reviewed internally.<br><br>
       If approved, you will be contacted directly.
     </p>
   </div>
 </section>
+
+<footer>© FANCLUB — MEMBERS ONLY</footer>
 
 <script>
   const form = document.getElementById("access-form");
