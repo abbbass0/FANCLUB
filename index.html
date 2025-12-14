@@ -140,10 +140,22 @@ p {
 .concept-text {
   font-size: 13px;
   opacity: 0.5;
-  max-width: 500px;
-  margin-bottom: 40px;
-  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+  padding: 0 12px;
+  word-wrap: break-word;
 }
+
+  @media (max-width: 480px) {
+  .concept-text {
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 90%;
+  }
+}
+
+
 
 
 .concept-images img {
