@@ -19,7 +19,6 @@
       background: #000;
       color: #e5e5e5;
       font-family: 'Inter', sans-serif;
-      scroll-behavior: smooth;
     }
 
     header {
@@ -46,8 +45,6 @@
       color: #e5e5e5;
       text-decoration: none;
     }
-
-    nav a:hover { opacity: 0.5; }
 
     section {
       min-height: 100vh;
@@ -81,70 +78,6 @@
       opacity: 0.85;
     }
 
-    /* PRODUCT BACKGROUND */
-    .product-bg {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-bg::before {
-      content: "";
-      position: absolute;
-      inset: -20%;
-      background: url("concrete-wall.jpeg") center 75% / cover no-repeat;
-      filter: blur(18px);
-      opacity: 0.35;
-      z-index: -2;
-    }
-
-    .product-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        #000 0%,
-        rgba(0,0,0,0.4) 30%,
-        rgba(0,0,0,0.4) 70%,
-        #000 100%
-      );
-      z-index: -1;
-    }
-
-    /* GRAIN */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url("grain.png");
-      opacity: 0.06;
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    .images {
-      margin-top: 60px;
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .images img {
-      width: 260px;
-      opacity: 0.9;
-      transition: transform 0.6s ease, opacity 0.6s ease;
-    }
-
-    @media (min-width: 768px) {
-      .images img { width: 380px; }
-    }
-
-    @media (min-width: 1200px) {
-      .images img { width: 580px; }
-      .images img:hover { transform: scale(1.06); opacity: 1; }
-    }
-
     /* FORM */
     form {
       margin-top: 40px;
@@ -171,81 +104,37 @@
       letter-spacing: 2px;
     }
 
-    button:hover { opacity: 0.7; }
-
-    footer {
-      padding: 40px;
-      font-size: 12px;
-      opacity: 0.4;
-      text-align: center;
-    }
-
-    /* REVIEW SCREEN */
     #review-screen {
       display: none;
       margin-top: 60px;
     }
-
-    /* FADE-IN */
-    .reveal { opacity: 0; transform: translateY(40px); transition: 1s; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 
 <body>
 
-<header id="home">
+<header>
   <img src="logo.png" alt="FANCLUB Logo">
   <nav>
     <a href="#home">HOME</a>
-    <a href="#product">PRODUCT</a>
     <a href="#purchase">PURCHASE</a>
   </nav>
 </header>
 
-<section class="reveal">
+<section>
   <h1>MEMBERS ONLY</h1>
   <h2>ACCESS IS LIMITED</h2>
-  <p>
-    FANCLUB is not built for the masses.<br><br>
-    Controlled releases for a private circle.<br><br>
-    Every piece is deliberate.
-  </p>
+  <p>Every application is reviewed. No instant access.</p>
 </section>
 
-<section id="product" class="product-bg reveal">
-  <h1>DROP 001</h1>
-  <h2>LIMITED · CONTROLLED</h2>
-
-  <div class="images">
-    <img src="jacket-front.png">
-    <img src="jacket-back.png">
-  </div>
-
-  <div class="images">
-    <img src="jacket-front-alt.png">
-    <img src="jacket-back-alt.png">
-  </div>
-
-  <p style="margin-top:40px;">Release Date: To Be Announced</p>
-</section>
-
-<section id="purchase" class="reveal">
+<section id="purchase">
   <h1>REQUEST ACCESS</h1>
   <h2>ORDERS ARE REVIEWED</h2>
 
-  <!-- HIDDEN IFRAME -->
-  <iframe name="hidden_iframe" style="display:none;"></iframe>
-
-  <form id="access-form"
-        action="https://formspree.io/f/mrbnjobk"
-        method="POST"
-        target="hidden_iframe">
-
+  <form id="access-form">
     <input type="text" name="name" placeholder="Full Name" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="text" name="instagram" placeholder="Your Instagram Username" required>
-    <input type="text" name="address" placeholder="City / Address" required>
     <textarea name="message" rows="4" placeholder="Product / Message"></textarea>
     <button type="submit">SUBMIT REQUEST</button>
   </form>
@@ -255,36 +144,27 @@
     <h2>UNDER REVIEW</h2>
     <p>
       Your request has been submitted.<br><br>
-      FANCLUB does not operate on instant access.
-      Every application is reviewed internally.<br><br>
-      If approved, you will be contacted directly.<br><br>
-      No further action is required.
+      FANCLUB does not operate on instant access.<br><br>
+      If approved, you will be contacted directly.
     </p>
   </div>
 </section>
 
-<footer>© FANCLUB — MEMBERS ONLY</footer>
-
 <script>
-  // Fade-in on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(r => observer.observe(r));
-
-  // Show review screen on submit (no redirect)
   const form = document.getElementById("access-form");
   const review = document.getElementById("review-screen");
 
-  form.addEventListener("submit", () => {
-    setTimeout(() => {
-      form.style.display = "none";
-      review.style.display = "block";
-      review.classList.add("visible");
-    }, 200);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    fetch("https://formspree.io/f/mrbnjobk", {
+      method: "POST",
+      body: new FormData(form),
+      headers: { "Accept": "application/json" }
+    });
+
+    form.style.display = "none";
+    review.style.display = "block";
   });
 </script>
 
