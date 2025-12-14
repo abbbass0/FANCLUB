@@ -32,7 +32,7 @@ html, body {
 /* HEADER */
 header {
   position: sticky;
-  top: env(safe-area-inset-top);
+  top: 0;
   z-index: 1000;
 
   display: flex;
@@ -42,9 +42,9 @@ header {
   padding: 24px 0 16px;
   gap: 10px;
 
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
+  background: transparent;
 }
+
 
 
 
@@ -404,6 +404,7 @@ footer {
     <a href="#purchase">PURCHASE</a>
   </nav>
 </header>
+
 
 <section>
   <h1>MEMBERS ONLY</h1>
