@@ -260,11 +260,23 @@
     <textarea name="message" rows="4" placeholder="Product / Message"></textarea>
     <button type="submit">SUBMIT REQUEST</button>
   </form>
+   <div id="review-screen" style="display:none; margin-top:60px;">
+    <h1>APPLICATION RECEIVED</h1>
+    <h2>UNDER REVIEW</h2>
+  <p>
+    Your request has been submitted.<br><br>
+    FANCLUB does not operate on instant access.
+    Every application is reviewed internally.<br><br>
+    If approved, you will be contacted directly.<br><br>
+    No further action is required.
+  </p>
+</div>
 </section>
 
 <footer>© FANCLUB — MEMBERS ONLY</footer>
 
 <script>
+  // Fade-in on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -275,7 +287,22 @@
   }, { threshold: 0.15 });
 
   reveals.forEach(r => observer.observe(r));
+
+  // Application reviewed screen
+  const form = document.querySelector("form");
+  const reviewScreen = document.getElementById("review-screen");
+
+  if (form && reviewScreen) {
+    form.addEventListener("submit", () => {
+      setTimeout(() => {
+        form.style.display = "none";
+        reviewScreen.style.display = "block";
+        reviewScreen.classList.add("visible");
+      }, 300);
+    });
+  }
 </script>
+
 
 </body>
 </html>
