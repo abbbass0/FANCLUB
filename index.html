@@ -4,14 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FANCLUB — Members Only</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     @font-face {
       font-family: 'Azonix';
       src: url('Azonix.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
     }
 
     * {
@@ -20,29 +19,16 @@
       box-sizing: border-box;
     }
 
-    html {
+    html, body {
       background: #000;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #0f0f0f 0%, #000000 60%);
       color: #e5e5e5;
+      font-family: 'Inter', sans-serif;
       scroll-behavior: smooth;
     }
 
-    a {
-      text-decoration: none;
-      color: #e5e5e5;
-    }
-
-    /* HEADER */
+    /* ---------- HEADER ---------- */
     header {
-      width: 100%;
       padding: 40px 0 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
       animation: fadeIn 1.5s ease;
     }
@@ -55,24 +41,28 @@
 
     nav {
       display: flex;
+      justify-content: center;
       gap: 24px;
       font-size: 13px;
       letter-spacing: 2px;
       opacity: 0.85;
     }
 
-    nav a:hover {
-      opacity: 0.5;
+    nav a {
+      text-decoration: none;
+      color: #e5e5e5;
     }
 
-    /* SECTIONS */
+    nav a:hover { opacity: 0.5; }
+
+    /* ---------- SECTIONS ---------- */
     section {
       min-height: 100vh;
       padding: 90px 20px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       text-align: center;
     }
 
@@ -81,7 +71,6 @@
       font-size: 40px;
       letter-spacing: 4px;
       margin-bottom: 20px;
-      animation: slideUp 1.2s ease;
     }
 
     h2 {
@@ -97,29 +86,50 @@
       font-size: 15px;
       line-height: 1.9;
       opacity: 0.85;
-      animation: fadeIn 1.5s ease;
     }
 
-    /* PRODUCT BACKGROUND (FIXED & BLENDED) */
+    /* ---------- PRODUCT BACKGROUND (EDGELESS) ---------- */
     .product-bg {
       position: relative;
-      padding-top: 160px;
-      padding-bottom: 140px;
-      background:
-        linear-gradient(
-          rgba(0,0,0,1) 0%,
-          rgba(0,0,0,0.92) 20%,
-          rgba(0,0,0,0.85) 50%,
-          rgba(0,0,0,0.92) 80%,
-          rgba(0,0,0,1) 100%
-        ),
-        url('concrete-wall.jpeg');
-      background-size: cover;
-      background-position: center 75%;
-      background-repeat: no-repeat;
+      overflow: hidden;
     }
 
-    /* PRODUCT IMAGES */
+    .product-bg::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: url("concrete-wall.jpeg") center 75% / cover no-repeat;
+      filter: blur(18px);
+      opacity: 0.35;
+      z-index: -2;
+    }
+
+    .product-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        #000 0%,
+        rgba(0,0,0,0.4) 30%,
+        rgba(0,0,0,0.4) 70%,
+        #000 100%
+      );
+      z-index: -1;
+    }
+
+    /* ---------- GRAIN OVERLAY ---------- */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("grain.png");
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ---------- PRODUCT IMAGES ---------- */
     .images {
       margin-top: 60px;
       display: flex;
@@ -130,31 +140,20 @@
 
     .images img {
       width: 260px;
-      max-width: 90%;
       opacity: 0.9;
       transition: transform 0.6s ease, opacity 0.6s ease;
-      display: block;
-      background: transparent;
     }
 
     @media (min-width: 768px) {
-      .images img {
-        width: 380px;
-      }
+      .images img { width: 380px; }
     }
 
     @media (min-width: 1200px) {
-      .images img {
-        width: 580px;
-      }
-
-      .images img:hover {
-        transform: scale(1.06);
-        opacity: 1;
-      }
+      .images img { width: 580px; }
+      .images img:hover { transform: scale(1.06); opacity: 1; }
     }
 
-    /* FORM */
+    /* ---------- FORM ---------- */
     form {
       margin-top: 40px;
       width: 100%;
@@ -181,125 +180,102 @@
       letter-spacing: 2px;
     }
 
-    button:hover {
-      opacity: 0.7;
-    }
+    button:hover { opacity: 0.7; }
 
     footer {
       padding: 40px;
-      text-align: center;
       font-size: 12px;
       opacity: 0.4;
-      background: #000;
+      text-align: center;
+    }
+
+    /* ---------- FADE IN ON SCROLL ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
-    @keyframes slideUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
   </style>
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header id="home">
-    <img src="logo.png" alt="FANCLUB Logo">
-    <nav>
-      <a href="#home" data-target="home">HOME</a>
-      <a href="#product" data-target="product">PRODUCT</a>
-      <a href="#purchase" data-target="purchase">PURCHASE</a>
-    </nav>
-  </header>
+<header id="home">
+  <img src="logo.png" alt="FANCLUB Logo">
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#product">PRODUCT</a>
+    <a href="#purchase">PURCHASE</a>
+  </nav>
+</header>
 
-  <!-- ABOUT -->
-  <section>
-    <h1>MEMBERS ONLY</h1>
-    <h2>ACCESS IS LIMITED</h2>
-    <p>
-      FANCLUB is not built for the masses.
-      <br><br>
-      We create controlled releases for a private circle that values detail, intent, and restraint.
-      No open checkouts. No mass production.
-      <br><br>
-      Every piece is deliberate. Every member is chosen.
-    </p>
-  </section>
+<section class="reveal">
+  <h1>MEMBERS ONLY</h1>
+  <h2>ACCESS IS LIMITED</h2>
+  <p>
+    FANCLUB is not built for the masses.<br><br>
+    Controlled releases for a private circle.<br><br>
+    Every piece is deliberate.
+  </p>
+</section>
 
-  <!-- PRODUCT -->
-  <section id="product" class="product-bg">
-    <h1>DROP 001</h1>
-    <h2>LIMITED · CONTROLLED</h2>
+<section id="product" class="product-bg reveal">
+  <h1>DROP 001</h1>
+  <h2>LIMITED · CONTROLLED</h2>
 
-    <div class="images">
-      <img src="jacket-front.png" alt="Jacket Front - Blue">
-      <img src="jacket-back.png" alt="Jacket Back - Blue">
-    </div>
+  <div class="images">
+    <img src="jacket-front.png">
+    <img src="jacket-back.png">
+  </div>
 
-    <div class="images">
-      <img src="jacket-front-alt.png" alt="Jacket Front - Alternate Colorway">
-      <img src="jacket-back-alt.png" alt="Jacket Back - Alternate Colorway">
-    </div>
+  <div class="images">
+    <img src="jacket-front-alt.png">
+    <img src="jacket-back-alt.png">
+  </div>
 
-    <p style="margin-top:40px;">
-      Crafted with focus on structure, comfort, and movement.
-      <br><br>
-      Release Date: To Be Announced
-    </p>
-  </section>
+  <p style="margin-top:40px;">
+    Release Date: To Be Announced
+  </p>
+</section>
 
-  <!-- PURCHASE -->
-  <section id="purchase">
-    <h1>REQUEST ACCESS</h1>
-    <h2>ORDERS ARE REVIEWED</h2>
+<section id="purchase" class="reveal">
+  <h1>REQUEST ACCESS</h1>
+  <h2>ORDERS ARE REVIEWED</h2>
 
-    <p>
-      Submitting a request does not guarantee access.
-      Approved members will be contacted directly.
-    </p>
+  <form action="https://formspree.io/f/mrbnjobk" method="POST">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="instagram" placeholder="Your Instagram Username" required>
+    <input type="text" name="address" placeholder="City / Address" required>
+    <textarea name="message" rows="4" placeholder="Product / Message"></textarea>
+    <button type="submit">SUBMIT REQUEST</button>
+  </form>
+</section>
 
-    <form action="https://formspree.io/f/mrbnjobk" method="POST">
-      <input type="text" name="name" placeholder="Full Name" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="text" name="address" placeholder="City / Address" required>
-      <textarea name="message" rows="4" placeholder="Product / Message"></textarea>
-      <button type="submit">SUBMIT REQUEST</button>
-    </form>
-  </section>
+<footer>© FANCLUB — MEMBERS ONLY</footer>
 
-  <footer>
-    © FANCLUB — MEMBERS ONLY
-  </footer>
-
-  <script>
-    // Fast smooth scroll for navigation
-    const links = document.querySelectorAll('nav a');
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const targetId = link.getAttribute('data-target');
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        const start = window.pageYOffset;
-        const end = target.offsetTop;
-        const duration = 500;
-        let startTime = null;
-        function scrollAnimation(currentTime) {
-          if (!startTime) startTime = currentTime;
-          const timeElapsed = currentTime - startTime;
-          const progress = Math.min(timeElapsed / duration, 1);
-          window.scrollTo(0, start + (end - start) * progress);
-          if (timeElapsed < duration) {
-            requestAnimationFrame(scrollAnimation);
-          }
-        }
-        requestAnimationFrame(scrollAnimation);
-      });
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
     });
-  </script>
+  }, { threshold: 0.15 });
+
+  reveals.forEach(r => observer.observe(r));
+</script>
+
 </body>
 </html>
