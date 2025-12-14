@@ -344,20 +344,41 @@ footer {
 <footer>© FANCLUB — MEMBERS ONLY</footer>
 
 <script>
+/* ---------- FAST SMOOTH SCROLL FOR NAV ---------- */
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const targetId = link.getAttribute('href').replace('#', '');
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    window.scrollTo({
+      top: target.offsetTop - 10,
+      behavior: 'smooth'
+    });
+  });
+});
+
+/* ---------- FORM SUBMIT ---------- */
 const form = document.getElementById("access-form");
 const review = document.getElementById("review-screen");
 
 form.addEventListener("submit", e => {
   e.preventDefault();
+
   fetch("https://formspree.io/f/mrbnjobk", {
     method: "POST",
     body: new FormData(form),
     headers: { "Accept": "application/json" }
   });
+
   form.style.display = "none";
   review.style.display = "block";
 });
 </script>
+
 
 </body>
 </html>
