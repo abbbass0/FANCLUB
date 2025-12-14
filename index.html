@@ -124,13 +124,34 @@ p {
   padding: 0 20px;
 }
 
+  /* CONCEPT TEXT */
+  .concept-title {
+  font-family: 'Azonix', sans-serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  opacity: 0.6;
+  margin-bottom: 12px;
+}
+
+.concept-text {
+  font-size: 13px;
+  opacity: 0.5;
+  max-width: 500px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+
 .concept-images img {
-  width: 100%;
-  max-width: 320px;
+  width: auto;
+  height: 360px;
+  max-width: 100%;
+  object-fit: contain;
   opacity: 0.35;
   filter: blur(2px);
   transition: opacity 0.6s ease;
 }
+
 
 /* Slight presence on hover (desktop only) */
 @media (min-width: 1024px) {
@@ -147,9 +168,10 @@ p {
   }
 
   .concept-images img {
-    max-width: 260px;
+    height: 280px;
   }
 }
+
 
   
 /* TABLET */
@@ -239,12 +261,18 @@ footer {
 
   <!-- CONCEPT STRIP -->
 <section class="concept-strip">
+  <h2 class="concept-title">CONCEPT SKETCHES</h2>
+  <p class="concept-text">
+    Early design studies exploring form, structure, and restraint.
+  </p>
+
   <div class="concept-images">
     <img src="sleeve-close-up.png" alt="">
     <img src="collar-close-up.png" alt="">
     <img src="hood-back-close-up.png" alt="">
   </div>
 </section>
+
 
 
 <section id="product">
